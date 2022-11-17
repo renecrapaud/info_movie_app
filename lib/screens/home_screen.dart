@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:info_movie_app/providers/movies_provider.dart';
 import 'package:info_movie_app/widgets/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:info_movie_app/search/search_delegate.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -12,7 +13,10 @@ class HomeScreen extends StatelessWidget {
           title: Text('Peliculas en cines'),
           elevation: 0,
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(Icons.search_outlined))
+            IconButton(
+                onPressed: () => showSearch(
+                    context: context, delegate: MovieSearchDelegate()),
+                icon: Icon(Icons.search_outlined))
           ],
         ),
         body: SingleChildScrollView(

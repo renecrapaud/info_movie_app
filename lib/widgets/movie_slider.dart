@@ -55,6 +55,8 @@ class _MovieSliderState extends State<MovieSlider> {
                 scrollDirection: Axis.horizontal,
                 itemCount: widget.movies.length,
                 itemBuilder: (_, int index) {
+                  widget.movies[index].heroId =
+                      '${widget.title}-$index-${widget.movies[index].id}';
                   return Container(
                     width: 130,
                     height: 190,
@@ -64,15 +66,19 @@ class _MovieSliderState extends State<MovieSlider> {
                         GestureDetector(
                           onTap: () => Navigator.pushNamed(context, 'details',
                               arguments: widget.movies[index]),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: FadeInImage(
-                                placeholder: AssetImage('assets/no-image.jpg'),
-                                image: NetworkImage(
-                                    widget.movies[index].fullPosterImg),
-                                width: 130,
-                                height: 190,
-                                fit: BoxFit.cover),
+                          child: Hero(
+                            tag: widget.movies[index].heroId!,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: FadeInImage(
+                                  placeholder:
+                                      AssetImage('assets/no-image.jpg'),
+                                  image: NetworkImage(
+                                      widget.movies[index].fullPosterImg),
+                                  width: 130,
+                                  height: 190,
+                                  fit: BoxFit.cover),
+                            ),
                           ),
                         ),
                         SizedBox(
